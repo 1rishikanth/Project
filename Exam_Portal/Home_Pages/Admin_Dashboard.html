@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam Portal</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assests/style.css">
+
+    <!-- Ethers.js -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <style>
+         .nav-link i {
+            font-size: 1.5em; /* Increase icon size */
+        }
+        body {
+            padding-top: 56px; /* Space for fixed navbar */
+            background-image: url(../Home_Pages/pexels-jplenio-1103970.jpg);   
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header with Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="#">Online Exam Portal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto"> <!-- Use 'mr-auto' to push to the right -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8000/"><i class="fas fa-home"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about"><i class="fas fa-info-circle"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#service"><i class="fas fa-concierge-bell"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#help"><i class="fas fa-question-circle"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <button id="connectWalletButton" class="btn btn-link">Connect Wallet</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="logoutButton" class="btn btn-link ml-3">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container mt-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Create Exam</h2>
+                <input type="text" id="examName" class="form-control mb-2" placeholder="Exam Name">
+                <input type="number" id="totalMarks" class="form-control mb-2" placeholder="Total Marks">
+                <input type="number" id="passingMarks" class="form-control mb-2" placeholder="Passing Marks">
+                <button id="createExamButton" class="btn btn-success">Create Exam</button>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Add Question</h2>
+                <input type="number" id="questionExamId" class="form-control mb-2" placeholder="Exam ID">
+                <input type="text" id="questionText" class="form-control mb-2" placeholder="Question Text">
+                <input type="text" id="optionA" class="form-control mb-2" placeholder="Option A">
+                <input type="text" id="optionB" class="form-control mb-2" placeholder="Option B">
+                <input type="text" id="optionC" class="form-control mb-2" placeholder="Option C">
+                <input type="text" id="optionD" class="form-control mb-2" placeholder="Option D">
+                <input type="text" id="correctAnswer" class="form-control mb-2" placeholder="Correct Answer">
+                <button id="addQuestionButton" class="btn btn-success">Add Question</button>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Add Student</h2>
+                <input type="text" id="studentName" class="form-control mb-2" placeholder="Student Name">
+                <button id="addStudentButton" class="btn btn-success">Add Student</button>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Register for Exam</h2>
+                <input type="number" id="studentId" class="form-control mb-2" placeholder="Student ID">
+                <input type="number" id="examId" class="form-control mb-2" placeholder="Exam ID">
+                <button id="registerExamButton" class="btn btn-success">Register for Exam</button>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Get Student Score</h2>
+                <input type="number" id="scoreStudentId" class="form-control mb-2" placeholder="Student ID">
+                <input type="number" id="scoreExamId" class="form-control mb-2" placeholder="Exam ID">
+                <button id="getScoreButton" class="btn btn-success">Get Score</button>
+                <p id="scoreResult" class="mt-2"></p>
+            </div>
+        </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2>Deactivate Exam</h2>
+            <input type="number" id="deactivateExamId" class="form-control mb-2" placeholder="Exam ID">
+            <button id="deactivateExamButton" class="btn btn-danger">Deactivate Exam</button>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2>Update Exam Results</h2>
+            <input type="number" id="updateStudentId" class="form-control mb-2" placeholder="Student ID">
+            <input type="number" id="updateExamId" class="form-control mb-2" placeholder="Exam ID">
+            <input type="number" id="updateScore" class="form-control mb-2" placeholder="Score">
+            <button id="updateResultsButton" class="btn btn-success">Update Results</button>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2>Total Students</h2>
+            <button id="totalStudentsButton" class="btn btn-info">Get Total Students</button>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2>Get Student Info</h2>
+            <input type="number" id="studentInfoId" class="form-control mb-2" placeholder="Student ID">
+            <button id="getStudentInfoButton" class="btn btn-info">Get Student Info</button>
+        </div>
+    </div>    
+    </div>
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2024 Online Exam Portal. All rights reserved.</p>
+    </footer>
+
+    <script src="../App.js"></script>
+    <!-- Bootstrap JS (optional, for responsive behavior) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

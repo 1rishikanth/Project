@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "ethers": "^6.13.4",
+    "firebase": "^10.14.1",
+    "web3": "^4.13.0"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "web3.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
