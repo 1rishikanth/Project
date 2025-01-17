@@ -4,13 +4,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 
 // Firebase Config
 const firebaseConfig = {
-    apiKey: "AIzaSyDdJPcq3M_lpbBgXcpRIwqw9Q9XUFFaqZk",
-    authDomain: "examportal-51eea.firebaseapp.com",
-    projectId: "examportal-51eea",
-    storageBucket: "examportal-51eea.appspot.com",
-    messagingSenderId: "738192023136",
-    appId: "1:738192023136:web:4dc927484e4ea56c61ed05",
-    measurementId: "G-EN7WBWKNV2"
+    Your Conifg
 };
 
 // Initialize Firebase
